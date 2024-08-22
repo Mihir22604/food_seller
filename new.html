@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Information</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Light grey background */
+            background-image: url('https://example.com/your-background-image.jpg'); /* Same background image */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        header, footer {
+            background-color: rgba(255, 165, 0, 0.8); /* Semi-transparent orange */
+            text-align: center;
+            padding: 10px 0;
+            animation: fadeIn 2s ease-in;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            background-color: greenyellow;
+            color: black;
+            text-align: center;
+            padding: 10px 0;
+            transition: background-color 0.5s ease;
+        }
+        nav:hover {
+            background-color: lightgreen;
+        }
+        nav a {
+            color: black;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease, font-size 0.3s ease;
+        }
+        nav a:hover {
+            color: darkorange;
+            font-size: 1.2em;
+            animation: bounce 0.3s;
+        }
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            animation: fadeIn 2s ease-in;
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        li {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        li:hover {
+            background-color: #f1f1f1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        footer {
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Happy Fruit Seller</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+            <a href="additional-info.html">Additional Info</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <article>
+            <h2>Why Fruits Are Essential</h2>
+            <ul>
+                <li>Good Nutrition Improves Well-Being</li>
+                <li>It's Expensive To Be Unhealthy</li>
+                <li>Helps You Manage A Healthy Weight</li>
+                <li>Maintains Your Immune System</li>
+            </ul>
+        </article>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Happy Fruit Seller. All rights reserved.</p>
+    </footer>
+</body>
+</html>

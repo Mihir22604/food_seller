@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Seller</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-image: url('https://example.com/your-background-image.jpg'); /* Add your background image URL */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        header, footer {
+            background-color: rgba(255, 165, 0, 0.8); /* Semi-transparent orange */
+            text-align: center;
+            padding: 10px 0;
+            animation: fadeIn 2s ease-in;
+        }
+        header h1 {
+            animation: fadeIn 2s ease-in;
+        }
+        nav {
+            background-color: greenyellow;
+            color: black;
+            text-align: center;
+            padding: 10px 0;
+            transition: background-color 0.5s ease;
+        }
+        nav:hover {
+            background-color: lightgreen;
+        }
+        aside {
+            text-align: right;
+        }
+        nav a {
+            color: black;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease, font-size 0.3s ease;
+        }
+        nav a:hover {
+            color: darkorange;
+            font-size: 1.2em;
+            animation: bounce 0.3s;
+        }
+        .content {
+            padding: 20px;
+            animation: fadeIn 2s ease-in;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        ul, ol {
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            animation: slideInRight 1s ease-out;
+        }
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        content, section, p {
+            font-size: large;
+        }
+        #about {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        #about article, #about aside {
+            flex: 1;
+            margin: 10px;
+            animation: fadeIn 2s ease-in;
+        }
+        #about article {
+            max-width: 45%;
+        }
+        #about h2 {
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+        #contact p {
+            margin: 10px 0;
+        }
+        video {
+            display: block;
+            margin: 0 auto;
+            width: 700px;
+        }
+        a:link {
+            color: crimson;
+        }
+        a:hover {
+            color: darkred;
+        }
+        footer {
+            animation: slideUp 1s ease-in-out;
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        /* Scroll animations */
+        .fadeInOnScroll {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .fadeInOnScroll.visible {
+            opacity: 1;
+        }
+
+        /* Calculator styles */
+        .calculator {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            width: 320px;
+            display: none; /* Hidden by default */
+            animation: fadeIn 2s ease-in;
+        }
+        .calculator input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            font-size: 20px;
+            text-align: right;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .calculator button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin: 5px;
+            border: none;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .calculator button:hover {
+            background-color: #ddd;
+        }
+        .calculator .row {
+            display: flex;
+            justify-content: center;
+        }
+        #showCalculatorButton {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 20px auto;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        #showCalculatorButton:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Modal styles */
+        #modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+            animation: fadeIn 0.5s ease-in;
+        }
+        #modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            animation: slideInUp 0.5s ease-in-out;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Happy Fruit Seller</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="content">
+        <section>
+            <p style="font-size: 60px;">
+                Eat a fruit in a day
+                <br>
+                Keep the doctor away
+            </p>
+            <article style="display: flex;">
+                <div style="flex: 1;">
+                    <p>
+                        Enjoy nature's sweetness, handpicked for you. Experience the juiciest and tastiest fruits, from farm to table.
+                        <br>
+                        Our selection is pure, organic, and fresh, perfect for savoring the flavor of seasonal delights. Healthy living starts with fresh fruits, your daily dose of vitamins and nutrients.
+                        <br>
+                        Discover quality fruits with unmatched taste, picked with love and delivered with care. Enjoy the best of nature's bounty, right at your doorstep.
+                    </p>
+                </div>
+                <aside style="flex: 1; text-align: right;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzytXSqyKAp1BYS-WHSEPN7DARMMVYcmSO5g&s" alt="Sample Image" width="700" height="1500">
+                </aside>
+            </article>
+        </section>
+
+        <section id="about">
+            <article>
+                <h2>Key features of eating fruits</h2>
+                <ul>
+                    <li>Cholesterol controller</li>
+                    <li>Boosts immunity</li>
+                    <li>Enhances digestion</li>
+                    <li>Prevents cardiac issues</li>
+                </ul>
+                <a href="new.html">Click on the link below</a>
+            </article>
+            <aside>
+                <section id="contact">
+                    <h2>Contact</h2>
+                    <p>Enjoy the beautiful and amazing journey of fruits as its delicious product</p>
+                    <video controls>
+                        <source src="mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </section>
+            </aside>
+        </section>
+
+        <section id="services" class="fadeInOnScroll">
+            <h2>Services</h2>
+            <p>Delectable products of fruits</p>
+            <ol>
+                <li>Mango Smoothie</li>
+                <li>Fruit Salad</li>
+                <li>Apple Ice-Cream</li>
+            </ol>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Prices (Rupees)</th>
+                </tr>
+                <tr>
+                    <td>Mango Smoothie</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>Fruit Salad</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Apple Ice-Cream</td>
+                    <td>50</td>
+                </tr>
+            </table>
+        </section>
+
+        <button id="showCalculatorButton">Show Calculator</button>
+
+        <!-- Calculator Section -->
+        <section id="calculator" class="calculator">
+            <h2>Calculator</h2>
+            <input type="text" id="display" readonly>
+            <div class="row">
+                <button onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                <button onclick="setOperation('/')">/</button>
+            </div>
+            <div class="row">
+                <button onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                <button onclick="setOperation('*')">*</button>
+            </div>
+            <div class="row">
+                <button onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                <button onclick="setOperation('-')">-</button>
+            </div>
+            <div class="row">
+                <button onclick="appendNumber('0')">0</button>
+                <button onclick="appendNumber('.')">.</button>
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="setOperation('+')">+</button>
+            </div>
+            <div class="row">
+                <button onclick="calculateResult()" style="width: 100%; background-color: #007BFF; color: white;">=</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Happy Fruit Seller</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal">
+        <div id="modal-content">
+            <span class="close">&times;</span>
+            <h2>Welcome to Happy Fruit Seller!</h2>
+            <p>Thank you for visiting our site. We hope you enjoy our fresh and delicious fruits. If you have any questions or need assistance, feel free to contact us!</p>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let operation = '';
+        let previousInput = '';
+
+        // Function to append number to display
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('display').value = currentInput;
+        }
+
+        // Function to set the operation
+        function setOperation(op) {
+            if (currentInput === '') return; // Prevent setting operation if no number is entered
+            if (previousInput !== '') {
+                calculateResult(); // Calculate previous result before setting new operation
+            }
+            operation = op;
+            previousInput = currentInput;
+            currentInput = '';
+        }
+
+        // Function to clear the display
+        function clearDisplay() {
+            currentInput = '';
+            previousInput = '';
+            operation = '';
+            document.getElementById('display').value = '';
+        }
+
+        // Function to calculate the result
+        function calculateResult() {
+            if (currentInput === '' || previousInput === '') return; // Prevent calculation if input is missing
+            let result;
+            const prev = parseFloat(previousInput);
+            const curr = parseFloat(currentInput);
+            switch (operation) {
+                case '+':
+                    result = prev + curr;
+                    break;
+                case '-':
+                    result = prev - curr;
+                    break;
+                case '*':
+                    result = prev * curr;
+                    break;
+                case '/':
+                    result = prev / curr;
+                    break;
+                default:
+                    return;
+            }
+            document.getElementById('display').value = result;
+            previousInput = result;
+            currentInput = '';
+            operation = '';
+        }
+
+        // Show/Hide calculator function
+        document.getElementById('showCalculatorButton').addEventListener('click', function() {
+            const calculator = document.getElementById('calculator');
+            if (calculator.style.display === 'none' || calculator.style.display === '') {
+                calculator.style.display = 'block';
+                this.textContent = 'Hide Calculator';
+            } else {
+                calculator.style.display = 'none';
+                this.textContent = 'Show Calculator';
+            }
+        });
+
+        // Function to add class 'visible' to elements in view
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.fadeInOnScroll');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // Event listener for scroll event
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Initial call to reveal elements on page load
+        revealOnScroll();
+
+        // Modal functionality
+        const modal = document.getElementById('modal');
+        const closeModal = document.querySelector('.close');
+
+        // Show the modal after a delay
+        setTimeout(() => {
+            modal.style.display = 'block';
+        }, 2000); // Show after 2 seconds
+
+        // Close the modal
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close the modal if the user clicks outside of the modal content
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
